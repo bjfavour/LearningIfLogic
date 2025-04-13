@@ -1,31 +1,56 @@
-let age = document.querySelector('.ageinput')
-const submit = document.querySelector('.submit')
-const result = document.querySelector('.result')
-
-
+const open = document.querySelector('.bi');
+const visibility = document.querySelector('.dropdown');
+const buttons = document.querySelectorAll('.getmessage'); 
+const submit = document.querySelector('.submit');
+let selectMessage = document.querySelector('.show');
+let output = document.querySelector('.result');
+const reset = document.querySelector('.reset')
 let message;
-let cost = 0;
+let activity;
 
-submit.addEventListener('click', () => {
-    let ageValue = parseInt(age.value);
+open.addEventListener('click', () => {
+    visibility.style.display = "block";
+});
 
-    if (ageValue <= 3) {
-        cost = 0;
-        message = 'Under age, access is free';
-    } else if (ageValue > 3 && ageValue < 12) {
-        cost = 5;
-        message ='You have to pay US$5 to be granted access';
-    } else if (ageValue >= 12 && ageValue < 65) {
-        cost = 10;
-        message = 'Your access is US$10';
-    } else if (ageValue >= 65) {
-        cost = 7;
-        message = 'Your access is US$7';
+buttons.forEach(item => {
+    item.addEventListener('click', (e) => {
+        console.log(item.textContent); 
+        selectMessage.textContent = item.textContent;
+        visibility.style.display = "none";
+        activity = item.textContent.trim();
+        console.log(activity)
+         
         
+    });
+});
+
+
+const calculate = () => {
+    
+    if (activity == "Get up") {
+        message = "It is 6:30AM";
+    } else if (activity == "Breakfast") {
+        message = "It is 7:00AM";
+    } else if (activity == "Drive to work") {
+        message = "It is 8:00AM";
+    } else if (activity == "Lunch") {
+        message = "It is 12:00PM";
+    } else if (activity == "Drive home") {
+        message = "It is 5:00PM";
+    } else if (activity == "Dinner") {
+        message = "It is 6:30PM";
+    } else {
+        message = "No valid activity selected"; 
     }
 
-    console.log(message);
-    result.textContent = message
+    console.log(message); 
+    output.textContent = message;
+};
+
+submit.addEventListener('click', () => {
+    calculate(); 
+});
+
+reset.addEventListener('click', () => {
+    window.location.reload();
 })
-
-
